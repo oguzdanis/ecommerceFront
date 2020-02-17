@@ -8,9 +8,11 @@
   <div class="card" style="width: 18rem;">
     <img [src]="product.pictureUrl" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">{{product.name}}</h5>
+      <h5 class="card-title">{{product.name}}   <p>{{product.price | currency:'₺'}} </p> </h5>
       <p class="card-text">{{product.description}}</p>
-      <a href="{{product.productUrl}}" class="btn btn-primary">Ürün sitesine git</a>
+<!--      <a href="{{product.productUrl}}" class="btn btn-primary">Ürün sitesine git</a>-->
+      <a (click)="addToCart(product)" class="btn btn-primary">Ürün sitesine git</a>
+
     </div>
   </div>
 </div>

@@ -1,26 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from './product';
+import {AlertifyService} from '../services/alertify.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+  providers:[AlertifyService]
 })
 export class ProductComponent implements OnInit {
-  constructor() { }
+  constructor(private alertifyService:AlertifyService,private  http:HttpClient) { }
   title = "Ürün Listesi";
-  products: Product[] = [
-    {
-      id:1,
-      name: "İphone 11 Pro",
-      price: 2500,
-      description: "Günümüz Türkiye'sinde statu belirtisi olan bir cihazdır. Parası olana tavsiye olunur.",
-      pictureUrl: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-11-pro-gold-select-2019_GEO_EMEA?wid=470&hei=556&fmt=png-alpha&.v=1567808542418",
-      productUrl: "https://www.apple.com/tr/iphone-11/"
-    }
-  ]
+  products: Product[] ;
 
   ngOnInit(): void {
+    this.http.
+    get<Product[]>("http://localhost:8080/api/product").
+    subscribe(data=>{
+      this.products = data;
+    });
   }
+
+  addToCart(product){
+    this.alertifyService.success(product.name+" Added")
+    this.alertifyService.error(product.name+" Error")
+  }
+
 
 }
