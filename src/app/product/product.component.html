@@ -1,0 +1,16 @@
+<h3 *ngIf="products; else noProduct">{{title}}</h3>
+<ng-template #noProduct>
+  <div class="alert alert-danger" role="alert">
+    Bu kategoride ürün yoktur!
+  </div>
+</ng-template>
+<div *ngFor="let product of products" class="row">
+  <div class="card" style="width: 18rem;">
+    <img [src]="product.pictureUrl" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">{{product.description}}</p>
+      <a href="{{product.productUrl}}" class="btn btn-primary">Ürün sitesine git</a>
+    </div>
+  </div>
+</div>
