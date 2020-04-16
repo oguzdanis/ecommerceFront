@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     CategoryComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule
   ],
